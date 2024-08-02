@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WEBAPP_ANGULAR_DOTNET", "WEBAPP_ANGULAR_DOTNET.csproj", "{A2132113-EC26-4466-B977-ED25D44055D5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2132113-EC26-4466-B977-ED25D44055D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2132113-EC26-4466-B977-ED25D44055D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2132113-EC26-4466-B977-ED25D44055D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2132113-EC26-4466-B977-ED25D44055D5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0870DB31-FB93-4EC9-8333-837B2DBE74AF}
+	EndGlobalSection
+EndGlobal
