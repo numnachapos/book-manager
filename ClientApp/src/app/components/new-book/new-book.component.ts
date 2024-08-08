@@ -11,10 +11,8 @@ import { Router } from '@angular/router';
 export class NewBookComponent implements OnInit {
 
   addBookForm: FormGroup = new FormGroup({});
-  constructor(private service: BookService, private fb: FormBuilder, private router: Router)
-  {
-
-  }
+  showError: Boolean = false;
+  constructor(private service: BookService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.addBookForm = this.fb.group({
@@ -36,7 +34,7 @@ export class NewBookComponent implements OnInit {
         this.router.navigate(['/books']);
       },
       error: (error) => {
-        console.error('There was an error!', error);
+        this.showError = true;
       }
     });
   }
