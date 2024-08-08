@@ -18,4 +18,16 @@ export class BookService {
   addBook(book: Book) {
     return this.http.post(this._baseURL+ "/AddBook", book);
   }
+
+  getBookbyId(id: number){
+    return this.http.get<Book>(this._baseURL + "/GetSingleBook/"+id);
+  }
+
+  updateBook(book: Book){
+    return this.http.put(this._baseURL + "/UpdateBook"+book.id, book);
+  }
+
+  deleteBook(id: number){
+    return this.http.delete(this._baseURL + "/DeleteBook/"+id);
+  }
 }
