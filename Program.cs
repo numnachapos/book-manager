@@ -1,9 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using WEBAPP_ANGULAR_DOTNET.Data;
 using WEBAPP_ANGULAR_DOTNET.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+// Configure Entity Framework with PostgreSQL
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnectionStringName")));
+// Register book services
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IBookService, BookService>();
 
@@ -18,6 +23,11 @@ builder.Services.AddCors(options =>
                    .AllowAnyHeader();
         });
 });
+
+// Add Swagger services
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -35,10 +45,27 @@ app.UseRouting();
 // Use CORS middleware
 app.UseCors("AllowAllOrigins");
 
+// Use Swagger middleware
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+});
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapFallbackToFile("index.html");
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+});
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

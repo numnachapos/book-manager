@@ -6,14 +6,9 @@ namespace WEBAPP_ANGULAR_DOTNET.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BooksController : ControllerBase
+    public class BooksController(IBookService bookService) : ControllerBase
     {
-        private readonly IBookService _bookService;
-
-        public BooksController(IBookService bookService)
-        {
-            _bookService = bookService;
-        }
+        private readonly IBookService _bookService = bookService;
 
         //Create or Add a new Book
         [HttpPost("AddBook")]
