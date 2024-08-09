@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using WEBAPP_ANGULAR_DOTNET.Data.Models.Enum;
 
 namespace WEBAPP_ANGULAR_DOTNET.Data.Models
 {
@@ -6,6 +7,9 @@ namespace WEBAPP_ANGULAR_DOTNET.Data.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Required]
+        public BookTypes BookType { get; set; }
 
         [Required]
         [MaxLength(255)]
