@@ -1,17 +1,19 @@
 using WEBAPP_ANGULAR_DOTNET.Data.Models;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace WEBAPP_ANGULAR_DOTNET.Data.Services
 {
     public interface IBookService
     {
-        List<Book> GetALLBooks();
+        Task<List<Book>> GetALLBooks();
 
-        Book GetBookById(int id);
+        Task<Book?> GetBookById(int id);
 
-        void UpdateBook(int id, Book newBook);
+        Task UpdateBook(int id, Book newBook);
 
-        void DeleteBook(int id);
+        Task DeleteBook(int id);
 
-        void AddBook(Book newBook);
+        Task AddBook(Book newBook);
     }
 }

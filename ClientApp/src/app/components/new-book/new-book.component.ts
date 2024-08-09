@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookService } from 'src/app/services/book.service';
 import { Router } from '@angular/router';
+import { toUTC } from '../../../utils/date-utils';
 
 @Component({
   selector: 'app-new-book',
@@ -28,14 +29,19 @@ export class NewBookComponent implements OnInit {
   }
 
   onSubmit() {
-    this.service.addBook(this.addBookForm.value).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.router.navigate(['/books']);
-      },
-      error: (error) => {
-        this.showError = true;
-      }
-    });
-  }
+      const formValue = this.addBookForm.value;
+      formValue.dateStart = toUTC(formValue.dateStart);
+      formValue.dateRead = toUTC(formValue.dateRead);
+      formValue.dateEnd = toUTC(formValue.dateEnd);
+  
+      this.service.addBook(formValue).subscribe({
+        next: (data) => {
+          console.log(data);
+          this.router.navigate(['/books']);
+        },
+        error: (error) => {
+          this.showError = true;
+        }
+      });
+    }
 }

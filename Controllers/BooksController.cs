@@ -10,92 +10,82 @@ namespace WEBAPP_ANGULAR_DOTNET.Controllers
     {
         private readonly IBookService _bookService = bookService;
 
-        //Create or Add a new Book
+        // Create or Add a new Book
         [HttpPost("AddBook")]
-        public IActionResult AddBook([FromBody] Book book)
+        public async Task<IActionResult> AddBook([FromBody] Book book)
         {
-            ObjectResult result;
             try
             {
-                _bookService.AddBook(book);
+                await _bookService.AddBook(book);
                 var response = new { message = "Book added successfully" };
-                result = Ok(response);
+                return Ok(response);
             }
             catch (Exception ex)
             {
-                result = StatusCode(500, new { error = ex.Message });
+                return StatusCode(500, new { error = ex.Message });
             }
-            return result;
         }
 
-        //Read all books
+        // Read all books
         [HttpGet("[action]")]
-        public IActionResult GetBooks()
+        public async Task<IActionResult> GetBooks()
         {
-            ObjectResult result;
             try
             {
-                var allBooks = _bookService.GetALLBooks();
-                result = Ok(allBooks);
+                var allBooks = await _bookService.GetALLBooks();
+                return Ok(allBooks);
             }
             catch (Exception ex)
             {
-                result = StatusCode(500, ex.Message);
+                return StatusCode(500, ex.Message);
             }
-            return result;
         }
 
-        //Update an exsisting book
+        // Update an existing book
         [HttpPut("UpdateBook/{id}")]
-        public IActionResult UpdateBook(int id, [FromBody] Book book)
+        public async Task<IActionResult> UpdateBook(int id, [FromBody] Book book)
         {
-            ObjectResult result;
             try
             {
-                _bookService.UpdateBook(id, book);
-                var response = new {message = $"Update {book.Title} successfully"};
-                result = Ok(response);
+                await _bookService.UpdateBook(id, book);
+                var response = new { message = $"Update {book.Title} successfully" };
+                return Ok(response);
             }
             catch (Exception ex)
             {
-                result = StatusCode(500, ex.Message);
+                return StatusCode(500, ex.Message);
             }
-            return result;
         }
 
-        //Delete an exsisting book
+        // Delete an existing book
         [HttpDelete("DeleteBook/{id}")]
-        public IActionResult DeleteBook(int id)
+        public async Task<IActionResult> DeleteBook(int id)
         {
-            ObjectResult result;
             try
             {
-                _bookService.DeleteBook(id);
-                var response = new {message = $"Book with ID {id} deleted successfully"};
-                result = Ok(response);
+                await _bookService.DeleteBook(id);
+                var response = new { message = $"Book with ID {id} deleted successfully" };
+                return Ok(response);
             }
             catch (Exception ex)
             {
-                result = StatusCode(500, ex.Message);
+                return StatusCode(500, ex.Message);
             }
-            return result;
         }
 
-        //Get a single book by ID
+        // Get a single book by ID
         [HttpGet("GetSingleBook/{id}")]
-        public IActionResult GetBookById(int id)
+        public async Task<IActionResult> GetBookById(int id)
         {
-            ObjectResult result;
             try
             {
-                var book = _bookService.GetBookById(id);
-                result = Ok(book);
+                var book = await _bookService.GetBookById(id);
+                return Ok(book);
             }
             catch (Exception ex)
             {
-                result = StatusCode(500, ex.Message);
+                return StatusCode(500, ex.Message);
             }
-            return result;
         }
     }
 }

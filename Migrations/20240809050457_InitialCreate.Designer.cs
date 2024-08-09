@@ -12,7 +12,7 @@ using WEBAPP_ANGULAR_DOTNET.Data;
 namespace WEBAPP_ANGULAR_DOTNET.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240809034800_InitialCreate")]
+    [Migration("20240809050457_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
