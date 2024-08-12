@@ -1,6 +1,7 @@
 using WEBAPP_ANGULAR_DOTNET.Data.Models;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using WEBAPP_ANGULAR_DOTNET.Data.Models.Enum;
 
 namespace WEBAPP_ANGULAR_DOTNET.Data.Services
 {
@@ -9,6 +10,8 @@ namespace WEBAPP_ANGULAR_DOTNET.Data.Services
         Task<List<Book>> GetALLBooks();
 
         Task<Book?> GetBookById(int id);
+
+        Task<List<object>> GetBooksByTypeAsync(BookTypes bookType);
 
         Task UpdateBook(int id, Book newBook);
 

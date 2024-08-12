@@ -1,7 +1,11 @@
-.book-details{
+.book-details {
     padding: 0 20% 0 20%;
 }
 
 .spaced-link {
     margin-right: 10px;
+}
+
+.smaller-heading {
+    font-size: 1.5em;
 }

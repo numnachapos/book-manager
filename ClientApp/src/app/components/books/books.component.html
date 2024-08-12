@@ -1,50 +1,56 @@
 <h1>Book Summary</h1>
 
-<p *ngIf="!books"><b>Loading...</b></p>
+<div>
+  <label for="bookType">Select Book Type:</label>
+  <select id="bookType" [(ngModel)]="selectedBookType" (change)="onBookTypeChange()">
+    <option value="">Select a book type</option>
+    <option *ngFor="let type of bookTypes" [value]="type">{{ type }}</option>
+  </select>
+</div>
 
-<table class="table table-striped" *ngIf="books">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Author</th>
-            <th>Rate</th>
-            <th>Date Started</th>
-            <th>Date Read</th>
-            <th>Date Ended</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let book of books">
-            <td>{{book.title}}</td>
-            <td>{{book.description | slice: 0:50}}...</td>
-            <td>{{book.author}}</td>
-            <td>{{book.rate}}</td>
-            <td>{{book.dateStart | date: "dd/MM/yyyy"}}</td>
-            <td>{{book.dateRead | date: "dd/MM/yyyy"}}</td>
-            <td>{{book.dateEnd | date: "dd/MM/yyyy"}}</td>
-            <td>{{book.dateRead ? "Read" : book.dateStart ? "In Progress" : "Not Started"}}</td>
-            <td>
-                <button type="button" 
-                    class="btn btn-default btn-sm" 
-                    (click)="showBook(book.id)">
-                    Show
-                </button>
-                <button type="button" 
-                    class="btn btn-success btn-sm" 
-                    (click)="updateBook(book.id)">
-                    Update
-                </button>
-                <button type="button" 
-                    class="btn btn-danger btn-sm" 
-                    (click)="deleteBook(book.id)">
-                    Delete
-                </button>
-            </td>
+<p *ngIf="!selectedBookType"><b>Please select a book type to view the books.</b></p>
 
-
-        </tr>
-    </tbody>
+<table class="table table-striped" *ngIf="selectedBookType && books.length">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Description</th>
+      <th *ngIf="isBiographyBookType">Subject</th>
+      <th *ngIf="isBiographyBookType">Time Period</th>
+      <th *ngIf="isCryptoCurrencyBookType">Currency Type</th>
+      <th *ngIf="isCryptoCurrencyBookType">Market Trend</th>
+      <th *ngIf="isInvestmentBookType">Investment Type</th>
+      <th *ngIf="isInvestmentBookType">Strategy</th>
+      <th>Rate</th>
+      <th>Date Started</th>
+      <th>Date Read</th>
+      <th>Date Ended</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <ng-container *ngFor="let book of books">
+    <tr>
+      <td>{{book.title}}</td>
+      <td>{{book.author}}</td>
+      <td>{{book.description | slice: 0:50}}...</td>
+      <td *ngIf="isBiographyBook(book)">{{book.subject}}</td>
+      <td *ngIf="isBiographyBook(book)">{{book.timePeriod}}</td>
+      <td *ngIf="isCryptoCurrencyBook(book)">{{book.currencyType}}</td>
+      <td *ngIf="isCryptoCurrencyBook(book)">{{book.marketTrend}}</td>
+      <td *ngIf="isInvestmentBook(book)">{{book.investmentType}}</td>
+      <td *ngIf="isInvestmentBook(book)">{{book.strategy}}</td>
+      <td>{{book.rate}}</td>
+      <td>{{book.dateStart | date: "dd/MM/yyyy"}}</td>
+      <td>{{book.dateRead | date: "dd/MM/yyyy"}}</td>
+      <td>{{book.dateEnd | date: "dd/MM/yyyy"}}</td>
+      <td>{{book.dateRead ? "Read" : book.dateStart ? "In Progress" : "Not Started"}}</td>
+      <td>
+        <button class="show-button" (click)="showBook(book.id)">Show</button>
+        <button class="update-button" (click)="updateBook(book.id)">Update</button>
+        <button class="delete-button" (click)="deleteBook(book.id)">Delete</button>
+      </td>
+    </tr>
+  </ng-container>
 </table>

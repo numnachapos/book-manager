@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Book } from '../interfaces/book';
+import { AnyBook, Book } from '../interfaces/book';
 import { environment } from '../../environments/environment';
+import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,23 @@ export class BookService {
 
   constructor(private http: HttpClient) { }
 
-  getAllBooks() {
-    return this.http.get<Book[]>(this._baseURL + "/GetBooks");
+  getBooksByType(bookType: string): Observable<AnyBook[]> {
+    let params = new HttpParams().set('bookType', bookType);
+    return this.http.get<AnyBook[]>(`${this._baseURL}/GetBooksByType`, { params }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error fetching books by type:', error.message);
+        return throwError(() => new Error('Failed to fetch books by type'));
+      })
+    );
+  }
+
+  getBookTypes(): Observable<string[]> {
+    return this.http.get<string[]>(`${this._baseURL}/types`).pipe(
+      catchError((error) => {
+        console.error('Error loading book types:', error.message);
+        return throwError(() => new Error('Failed to fetch book types'));
+      })
+    );
   }
 
   addBook(book: Book) {
@@ -23,7 +39,8 @@ export class BookService {
     return this.http.get<Book>(this._baseURL + "/GetSingleBook/"+id);
   }
 
-  updateBook(book: Book){
+  updateBook(book: AnyBook){
+    console.log('Book data:', book);
     return this.http.put(this._baseURL + "/UpdateBook/"+book.id, book);
   }
 

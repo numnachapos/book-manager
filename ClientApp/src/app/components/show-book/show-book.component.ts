@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Book } from 'src/app/interfaces/book';
+import { AnyBook, BiographyBook, Book, CryptoCurrencyBook, InvestmentBook } from 'src/app/interfaces/book';
+import { BookType } from 'src/app/interfaces/book-type.enum';
 import { BookService } from 'src/app/services/book.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { BookService } from 'src/app/services/book.service';
   styleUrls: ['./show-book.component.css']
 })
 export class ShowBookComponent implements OnInit{
-  book : Book = {} as Book;
+  book : AnyBook = {} as AnyBook;
   
   constructor(private service: BookService, private route: ActivatedRoute){}
 
@@ -17,5 +18,17 @@ export class ShowBookComponent implements OnInit{
     this.service.getBookbyId(this.route.snapshot.params.id).subscribe(data => {
       this.book = data;
     })
+  }
+
+  isBiographyBook(book: Book): book is BiographyBook {
+    return book.bookType === BookType.BiographyBook;
+  }
+
+  isCryptoCurrencyBook(book: Book): book is CryptoCurrencyBook {
+    return book.bookType === BookType.CryptoCurrencyBook;
+  }
+
+  isInvestmentBook(book: Book): book is InvestmentBook {
+    return book.bookType === BookType.InvestmentBook;
   }
 }

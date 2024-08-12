@@ -10,5 +10,14 @@ namespace WEBAPP_ANGULAR_DOTNET.Data
         public DbSet<BiographyBook> BiographyBooks { get; set; }
         public DbSet<CryptoCurrencyBook> CryptoCurrencyBooks { get; set; }
         public DbSet<InvestmentBook> InvestmentBooks { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Book>()
+                .Property(b => b.BookType)
+                .HasConversion<int>();
+        }
     }
 }

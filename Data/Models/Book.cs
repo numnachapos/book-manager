@@ -1,15 +1,16 @@
 using System.ComponentModel.DataAnnotations;
 using WEBAPP_ANGULAR_DOTNET.Data.Models.Enum;
+using System.Text.Json.Serialization;
 
 namespace WEBAPP_ANGULAR_DOTNET.Data.Models
 {
-    public class Book
+    public abstract class Book
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public BookTypes BookType { get; set; }
+        public abstract BookTypes BookType { get; set; }
 
         [Required]
         [MaxLength(255)]
@@ -27,5 +28,21 @@ namespace WEBAPP_ANGULAR_DOTNET.Data.Models
         public DateTime? DateStart { get; set; }
         public DateTime? DateRead { get; set; }
         public DateTime? DateEnd { get; set; }
+
+        // Parameterless constructor
+        protected Book() { }
+
+        [JsonConstructor]
+        public Book(int id, string title, string author, string description, double? rate, DateTime? dateStart, DateTime? dateRead, DateTime? dateEnd)
+        {
+            Id = id;
+            Title = title;
+            Author = author;
+            Description = description;
+            Rate = rate;
+            DateStart = dateStart;
+            DateRead = dateRead;
+            DateEnd = dateEnd;
+        }
     }
 }

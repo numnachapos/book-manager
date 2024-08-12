@@ -7,10 +7,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Configure Entity Framework with PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnectionStringName")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnectionStringName"))
+           .LogTo(Console.WriteLine, LogLevel.Information)); // Log SQL queries to the console
+
 // Register book services
-builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IBookService, BookService>();
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new BookJsonConverter());
+    });
 
 // Add CORS services
 builder.Services.AddCors(options =>

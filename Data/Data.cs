@@ -1,4 +1,6 @@
 using WEBAPP_ANGULAR_DOTNET.Data.Models;
+using WEBAPP_ANGULAR_DOTNET.Data.Models.Categories;
+using WEBAPP_ANGULAR_DOTNET.Data.Models.Enum;
 using Microsoft.EntityFrameworkCore;
 
 namespace WEBAPP_ANGULAR_DOTNET.Data
@@ -7,52 +9,50 @@ namespace WEBAPP_ANGULAR_DOTNET.Data
     {
         public static List<Book> Books => allBooks;
 
-        static List<Book> allBooks = new()
-        {
-            new Book()
+        static readonly List<Book> allBooks =
+        [
+            new BiographyBook()
             {
                 Id = 1,
-                Title="The Lean Startup",
-                Description="Most startups fail. But many of those failures are preventable. The Lean Startup is a new approach to business that's being adopted around the world. It is changing the way companies are built and new products are launched.",
-                Author="Eric Ries",
-                Rate= 4.9,
-                DateStart = new DateTime(2020, 01, 20).ToUniversalTime(),
-                DateRead = null,
-                DateEnd = null
+                Title = "Steve Jobs",
+                Description = "A biography of Steve Jobs, the co-founder of Apple Inc.",
+                Author = "Walter Isaacson",
+                Rate = 4.9,
+                DateStart = new DateTime(2021, 01, 20).ToUniversalTime(),
+                DateRead = new DateTime(2021, 02, 20).ToUniversalTime(),
+                DateEnd = new DateTime(2021, 03, 20).ToUniversalTime(),
+                Subject = "Steve Jobs",
+                TimePeriod = "1955-2011"
             },
-            new Book()
+            new CryptoCurrencyBook()
             {
                 Id = 2,
-                Title="Atomic Habits",
-                Description="No matter your goals, Atomic Habits offers a proven framework for improving--every day.",
-                Author="James Clear",
-                Rate= 4.8,
-                DateStart = null,
-                DateRead = null
+                Title = "Mastering Bitcoin",
+                Description = "Unlocking Digital Cryptocurrencies.",
+                Author = "Andreas M. Antonopoulos",
+                Rate = 4.8,
+                DateStart = new DateTime(2021, 04, 10).ToUniversalTime(),
+                DateRead = new DateTime(2021, 05, 10).ToUniversalTime(),
+                DateEnd = new DateTime(2021, 06, 10).ToUniversalTime(),
+                CurrencyType = "Bitcoin",
+                MarketTrend = "Bullish"
             },
-            new Book()
+            new InvestmentBook()
             {
                 Id = 3,
-                Title="The Psychology of Money",
-                Description="Timeless lessons on wealth, greed, and happiness doing well with money isn’t necessarily about what you know. It’s about how you behave.",
-                Author="Morgan Housel",
-                Rate= 4.4,
-                DateStart = new DateTime(2020, 02, 18).ToUniversalTime(),
-                DateRead = new DateTime(2020, 02, 19).ToUniversalTime()
-            },
-            new Book()
-            {
-                Id = 4,
-                Title="Zero to One",
-                Description="Zero to One presents at once an optimistic view of the future of progress in America and a new way of thinking about innovation: it starts by learning to ask the questions that lead you to find value in unexpected places.",
-                Author="Peter Thiel",
-                Rate= 4.7,
-                DateStart = new DateTime(2020, 02, 18).ToUniversalTime(),
-                DateEnd = new DateTime(2020, 02, 28).ToUniversalTime()
+                Title = "The Intelligent Investor",
+                Description = "The definitive book on value investing.",
+                Author = "Benjamin Graham",
+                Rate = 4.7,
+                DateStart = new DateTime(2021, 07, 15).ToUniversalTime(),
+                DateRead = new DateTime(2021, 08, 15).ToUniversalTime(),
+                DateEnd = new DateTime(2021, 09, 15).ToUniversalTime(),
+                InvestmentType = "Stocks",
+                Strategy = "Value Investing"
             }
-        };
+        ];
 
-        public static void SeedData(DbContext context)
+         public static void SeedData(AppDbContext context)
         {
             if (!context.Set<Book>().Any())
             {
