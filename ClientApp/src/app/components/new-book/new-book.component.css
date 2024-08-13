@@ -1,8 +1,18 @@
-.add-book{
+.add-book {
     padding: 0% 20% 0 20%;
 }
 
-.required::after{
+.required::after {
     content: "*";
+    color: red;
+}
+
+.alert-danger {
+    border-color: red;
+    background-color: #f8d7da;
+    padding: 0.5rem;
+}
+
+.error-message {
     color: red;
 }

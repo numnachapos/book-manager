@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookService } from 'src/app/services/book.service';
 import { Router } from '@angular/router';
 import { toUTC } from '../../../utils/data-utils';
-import { Subject } from 'rxjs';
 import { BookType } from 'src/app/interfaces/book-type.enum';
 
 @Component({

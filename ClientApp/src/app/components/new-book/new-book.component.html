@@ -3,8 +3,8 @@
         Book was not added, please try again.
     </div>
 
-<form [formGroup]="addBookForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
+    <form [formGroup]="addBookForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
             <label for="bookType">Select Book Type:</label>
             <select id="bookType" formControlName="bookType" (change)="onBookTypeChange()">
                 <option value="">Select a book type</option>
@@ -12,112 +12,142 @@
             </select>
         </div>
 
-    <div class="form-group">
-        <label for="title" class="required">Title</label>
-        <input type="text" class="form-control" id="title" formControlName="title" placeholder="Book-title">
-    </div>
-    <div *ngIf="addBookForm.controls['title'].invalid && addBookForm.controls['title'].dirty || addBookForm.controls['title'].touched" class="alert alert-danger">
-        <div *ngIf="addBookForm.controls['title']?.errors?.required">
-            Book title is required.
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="author" class="required">Author</label>
-        <input type="text" class="form-control" id="author" formControlName="author" placeholder="Book-author">
-    </div>
-    <div *ngIf="addBookForm.controls['author'].invalid && addBookForm.controls['author'].dirty || addBookForm.controls['author'].touched" class="alert alert-danger">
-        <div *ngIf="addBookForm.controls['author']?.errors?.required">
-            Book author is required.
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="description" class="required">Description</label>
-        <input type="text" class="form-control" id="description" formControlName="description" placeholder="Book-description">
-    </div>
-    <div *ngIf="addBookForm.controls['description'].invalid && addBookForm.controls['description'].dirty || addBookForm.controls['description'].touched" class="alert alert-danger">
-        <div *ngIf="addBookForm.controls['description']?.errors?.required">
-            Book description is required.
-        </div>
-        <div *ngIf="addBookForm.controls['description']?.errors?.minlength">
-            The description needs to be at least 30 characters.
-        </div>
-    </div>
-
-    <div *ngIf="isBiographyBookType">
         <div class="form-group">
-            <label for="subject">Subject</label>
-            <input type="text" class="form-control" id="subject" formControlName="subject" placeholder="Subject">
-        </div>
-        <div class="form-group">
-            <label for="timePeriod">Time Period</label>
-            <input type="text" class="form-control" id="timePeriod" formControlName="timePeriod" placeholder="Time Period">
-        </div>
-    </div>
-
-    <div *ngIf="isCryptoCurrencyBookType">
-        <div class="form-group">
-            <label for="currencyType">Currency Type</label>
-            <input type="text" class="form-control" id="currencyType" formControlName="currencyType" placeholder="Currency Type">
-        </div>
-        <div class="form-group">
-            <label for="marketTrend">Market Trend</label>
-            <input type="text" class="form-control" id="marketTrend" formControlName="marketTrend" placeholder="Market Trend">
-        </div>
-    </div>
-
-    <div *ngIf="isInvestmentBookType">
-        <div class="form-group">
-            <label for="investmentType">Investment Type</label>
-            <input type="text" class="form-control" id="investmentType" formControlName="investmentType" placeholder="Investment Type">
-        </div>
-        <div class="form-group">
-            <label for="strategy">Strategy</label>
-            <input type="text" class="form-control" id="strategy" formControlName="strategy" placeholder="Strategy">
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4 col-xs-4 col-sm-4">
-            <div class="form-group">
-                <label for="dateStart">Date Start</label>
-                <input type="date" 
-                class="form-control" 
-                id="dateStart" 
-                formControlName="dateStart"
-                placeholder="Date Start">
+            <label for="title" class="required">Title</label>
+            <input type="text" class="form-control" id="title" formControlName="title" placeholder="Book-title">
+            <div *ngIf="addBookForm.controls['title'].invalid && (addBookForm.controls['title'].dirty || addBookForm.controls['title'].touched)" class="alert-danger error-message">
+                <div *ngIf="addBookForm.controls['title'].errors?.required">
+                    Book title is required.
+                </div>
             </div>
         </div>
-        <div class="col-md-4 col-xs-4 col-sm-4">
-            <div class="form-group">
-                <label for="dateRead">Date Read</label>
-                <input type="date" 
-                class="form-control" 
-                id="dateRead" 
-                formControlName="dateRead"
-                placeholder="Date Read">
-            </div>
-        </div>
-        <div class="col-md-4 col-xs-4 col-sm-4">
-            <div class="form-group">
-                <label for="dateEnd">Date End</label>
-                <input type="date" 
-                class="form-control" 
-                id="dateEnd" 
-                formControlName="dateEnd"
-                placeholder="Date End">
-            </div>
-        </div>
-        <div class="col-md-4 col-xs-4 col-sm-4">
-            <div class="form-group">
-                <label for="rate">Rate</label>
-                <input type="number" min="0" max="5" class="form-control" id="rate" formControlName="rate" placeholder="Rate">
-            </div>
-        </div>
-    </div>
 
-    <button class="btn btn-success" type="submit" [disabled]="addBookForm.pristine || addBookForm.invalid">Add</button>
-    <button class="btn btn-defualt" [routerLink]="['/books']">Cancel</button>
-</form>
+        <div class="form-group">
+            <label for="author" class="required">Author</label>
+            <input type="text" class="form-control" id="author" formControlName="author" placeholder="Book-author">
+            <div *ngIf="addBookForm.controls['author'].invalid && (addBookForm.controls['author'].dirty || addBookForm.controls['author'].touched)" class="alert-danger error-message">
+                <div *ngIf="addBookForm.controls['author'].errors?.required">
+                    Book author is required.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="description" class="required">Description</label>
+            <input type="text" class="form-control" id="description" formControlName="description" placeholder="Book-description">
+            <div *ngIf="addBookForm.controls['description'].invalid && (addBookForm.controls['description'].dirty || addBookForm.controls['description'].touched)" class="alert-danger error-message">
+                <div *ngIf="addBookForm.controls['description'].errors?.required">
+                    Book description is required.
+                </div>
+                <div *ngIf="addBookForm.controls['description'].errors?.minlength">
+                    The description needs to be at least 30 characters.
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="isBiographyBookType">
+            <div class="form-group">
+                <label for="subject" class="required">Subject</label>
+                <input type="text" class="form-control" id="subject" formControlName="subject" placeholder="Subject">
+                <div *ngIf="addBookForm.controls['subject'].invalid && (addBookForm.controls['subject'].dirty || addBookForm.controls['subject'].touched)" class="alert-danger error-message">
+                    <div *ngIf="addBookForm.controls['subject'].errors?.required">
+                        Subject is required.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="timePeriod" class="required">Time Period</label>
+                <input type="text" class="form-control" id="timePeriod" formControlName="timePeriod" placeholder="Time Period">
+                <div *ngIf="addBookForm.controls['timePeriod'].invalid && (addBookForm.controls['timePeriod'].dirty || addBookForm.controls['timePeriod'].touched)" class="alert-danger error-message">
+                    <div *ngIf="addBookForm.controls['timePeriod'].errors?.required">
+                        Time period is required.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div *ngIf="isCryptoCurrencyBookType">
+            <div class="form-group">
+                <label for="currencyType" class="required">Currency Type</label>
+                <input type="text" class="form-control" id="currencyType" formControlName="currencyType" placeholder="Currency Type">
+                <div *ngIf="addBookForm.controls['currencyType'].invalid && (addBookForm.controls['currencyType'].dirty || addBookForm.controls['currencyType'].touched)" class="alert-danger error-message">
+                    <div *ngIf="addBookForm.controls['currencyType'].errors?.required">
+                        Currency type is required.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="marketTrend" class="required">Market Trend</label>
+                <input type="text" class="form-control" id="marketTrend" formControlName="marketTrend" placeholder="Market Trend">
+                <div *ngIf="addBookForm.controls['marketTrend'].invalid && (addBookForm.controls['marketTrend'].dirty || addBookForm.controls['marketTrend'].touched)" class="alert-danger error-message">
+                    <div *ngIf="addBookForm.controls['marketTrend'].errors?.required">
+                        Market trend is required.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div *ngIf="isInvestmentBookType">
+            <div class="form-group">
+                <label for="investmentType" class="required">Investment Type</label>
+                <input type="text" class="form-control" id="investmentType" formControlName="investmentType" placeholder="Investment Type">
+                <div *ngIf="addBookForm.controls['investmentType'].invalid && (addBookForm.controls['investmentType'].dirty || addBookForm.controls['investmentType'].touched)" class="alert-danger error-message">
+                    <div *ngIf="addBookForm.controls['investmentType'].errors?.required">
+                        Investment type is required.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="strategy" class="required">Strategy</label>
+                <input type="text" class="form-control" id="strategy" formControlName="strategy" placeholder="Strategy">
+                <div *ngIf="addBookForm.controls['strategy'].invalid && (addBookForm.controls['strategy'].dirty || addBookForm.controls['strategy'].touched)" class="alert-danger error-message">
+                    <div *ngIf="addBookForm.controls['strategy'].errors?.required">
+                        Strategy is required.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 col-xs-4 col-sm-4">
+                <div class="form-group">
+                    <label for="dateStart">Date Start</label>
+                    <input type="date" 
+                    class="form-control" 
+                    id="dateStart" 
+                    formControlName="dateStart"
+                    placeholder="Date Start">
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-4 col-sm-4">
+                <div class="form-group">
+                    <label for="dateRead">Date Read</label>
+                    <input type="date" 
+                    class="form-control" 
+                    id="dateRead" 
+                    formControlName="dateRead"
+                    placeholder="Date Read">
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-4 col-sm-4">
+                <div class="form-group">
+                    <label for="dateEnd">Date End</label>
+                    <input type="date" 
+                    class="form-control" 
+                    id="dateEnd" 
+                    formControlName="dateEnd"
+                    placeholder="Date End">
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-4 col-sm-4">
+                <div class="form-group">
+                    <label for="rate">Rate</label>
+                    <input type="number" min="0" max="5" class="form-control" id="rate" formControlName="rate" placeholder="Rate">
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-success" type="submit" [disabled]="addBookForm.pristine || addBookForm.invalid">Add</button>
+        <button class="btn btn-defualt" [routerLink]="['/books']">Cancel</button>
+    </form>
 </div>
