@@ -18,8 +18,8 @@ namespace WEBAPP_ANGULAR_DOTNET.Data.Models.Categories
         public BiographyBook() { }
 
         [JsonConstructor]
-        public BiographyBook(int id, string title, string author, string description, double? rate, DateTime? dateStart, DateTime? dateRead, DateTime? dateEnd, string subject, string timePeriod)
-            : base(id, title, author, description, rate, dateStart, dateRead, dateEnd)
+        public BiographyBook(int id, string title, string author, string description, double? rate, DateTime? dateStart, DateTime? dateRead, DateTime? dateEnd, int publisherId, Publisher publisher, string subject, string timePeriod)
+            : base(id, title, author, description, rate, dateStart, dateRead, dateEnd, publisherId, publisher)
         {
             Subject = subject;
             TimePeriod = timePeriod;

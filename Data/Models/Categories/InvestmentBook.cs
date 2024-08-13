@@ -20,8 +20,8 @@ namespace WEBAPP_ANGULAR_DOTNET.Data.Models.Categories
 
         // Constructor with parameters
         [JsonConstructor]
-        public InvestmentBook(int id, string title, string author, string description, double? rate, DateTime? dateStart, DateTime? dateRead, DateTime? dateEnd, string investmentType, string strategy)
-            : base(id, title, author, description, rate, dateStart, dateRead, dateEnd)
+        public InvestmentBook(int id, string title, string author, string description, double? rate, DateTime? dateStart, DateTime? dateRead, DateTime? dateEnd, int publisherId, Publisher publisher, string investmentType, string strategy)
+            : base(id, title, author, description, rate, dateStart, dateRead, dateEnd, publisherId, publisher)
         {
             InvestmentType = investmentType;
             Strategy = strategy;

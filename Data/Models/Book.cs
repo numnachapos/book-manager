@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using WEBAPP_ANGULAR_DOTNET.Data.Models.Enum;
 using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WEBAPP_ANGULAR_DOTNET.Data.Models
 {
@@ -29,11 +30,18 @@ namespace WEBAPP_ANGULAR_DOTNET.Data.Models
         public DateTime? DateRead { get; set; }
         public DateTime? DateEnd { get; set; }
 
+        //Foreign Key
+        [ForeignKey("Publisher")]
+        public int PublisherId { get; set; }
+
+        // Navigation property
+        public required Publisher Publisher { get; set; }
+
         // Parameterless constructor
         protected Book() { }
 
         [JsonConstructor]
-        public Book(int id, string title, string author, string description, double? rate, DateTime? dateStart, DateTime? dateRead, DateTime? dateEnd)
+        public Book(int id, string title, string author, string description, double? rate, DateTime? dateStart, DateTime? dateRead, DateTime? dateEnd, int publisherId, Publisher publisher)
         {
             Id = id;
             Title = title;
@@ -43,6 +51,7 @@ namespace WEBAPP_ANGULAR_DOTNET.Data.Models
             DateStart = dateStart;
             DateRead = dateRead;
             DateEnd = dateEnd;
+            // PublisherId = publisherId;
         }
     }
 }

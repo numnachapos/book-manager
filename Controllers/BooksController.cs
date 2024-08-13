@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
 using WEBAPP_ANGULAR_DOTNET.Data;
 using WEBAPP_ANGULAR_DOTNET.Data.Models;
 using WEBAPP_ANGULAR_DOTNET.Data.Services;

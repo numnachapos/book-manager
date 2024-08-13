@@ -12,6 +12,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // Register book services
 builder.Services.AddTransient<IBookService, BookService>();
+builder.Services.AddTransient<IPublisherService, PublisherService>();
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(options =>
     {

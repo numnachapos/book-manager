@@ -1,7 +1,5 @@
 using WEBAPP_ANGULAR_DOTNET.Data.Models;
 using WEBAPP_ANGULAR_DOTNET.Data.Models.Categories;
-using WEBAPP_ANGULAR_DOTNET.Data.Models.Enum;
-using Microsoft.EntityFrameworkCore;
 
 namespace WEBAPP_ANGULAR_DOTNET.Data
 {
@@ -22,7 +20,8 @@ namespace WEBAPP_ANGULAR_DOTNET.Data
                 DateRead = new DateTime(2021, 02, 20).ToUniversalTime(),
                 DateEnd = new DateTime(2021, 03, 20).ToUniversalTime(),
                 Subject = "Steve Jobs",
-                TimePeriod = "1955-2011"
+                TimePeriod = "1955-2011",
+                Publisher = new Publisher { PublisherId = 1, Name = "Simon & Schuster" }
             },
             new CryptoCurrencyBook()
             {
@@ -35,7 +34,8 @@ namespace WEBAPP_ANGULAR_DOTNET.Data
                 DateRead = new DateTime(2021, 05, 10).ToUniversalTime(),
                 DateEnd = new DateTime(2021, 06, 10).ToUniversalTime(),
                 CurrencyType = "Bitcoin",
-                MarketTrend = "Bullish"
+                MarketTrend = "Bullish",
+                Publisher = new Publisher { PublisherId = 2, Name = "O'Reilly Media" }
             },
             new InvestmentBook()
             {
@@ -48,7 +48,8 @@ namespace WEBAPP_ANGULAR_DOTNET.Data
                 DateRead = new DateTime(2021, 08, 15).ToUniversalTime(),
                 DateEnd = new DateTime(2021, 09, 15).ToUniversalTime(),
                 InvestmentType = "Stocks",
-                Strategy = "Value Investing"
+                Strategy = "Value Investing",
+                Publisher = new Publisher { PublisherId = 3, Name = "HarperCollins" }
             }
         ];
 
