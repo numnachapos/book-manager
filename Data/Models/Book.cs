@@ -51,7 +51,7 @@ namespace WEBAPP_ANGULAR_DOTNET.Data.Models
             DateStart = dateStart;
             DateRead = dateRead;
             DateEnd = dateEnd;
-            // PublisherId = publisherId;
+            PublisherId = publisherId;
         }
     }
 }

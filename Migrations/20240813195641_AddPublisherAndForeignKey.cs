@@ -19,7 +19,7 @@ namespace WEBAPP_ANGULAR_DOTNET.Migrations
                 defaultValue: 0);
 
             migrationBuilder.CreateTable(
-                name: "Publisher",
+                name: "Publishers",
                 columns: table => new
                 {
                     PublisherId = table.Column<int>(type: "integer", nullable: false)
@@ -28,22 +28,8 @@ namespace WEBAPP_ANGULAR_DOTNET.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Publisher", x => x.PublisherId);
+                    table.PrimaryKey("PK_Publishers", x => x.PublisherId);
                 });
-
-            // Insert a default publisher
-            migrationBuilder.InsertData(
-                table: "Publisher",
-                columns: ["PublisherId", "Name"],
-                values: [1, "Default Publisher"]);
-
-            // Update existing books to reference the default publisher
-            migrationBuilder.UpdateData(
-                table: "Books",
-                keyColumn: "PublisherId",
-                keyValue: 0,
-                column: "PublisherId",
-                value: 1);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Books_PublisherId",
@@ -54,7 +40,7 @@ namespace WEBAPP_ANGULAR_DOTNET.Migrations
                 name: "FK_Books_Publisher_PublisherId",
                 table: "Books",
                 column: "PublisherId",
-                principalTable: "Publisher",
+                principalTable: "Publishers",
                 principalColumn: "PublisherId",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -67,7 +53,7 @@ namespace WEBAPP_ANGULAR_DOTNET.Migrations
                 table: "Books");
 
             migrationBuilder.DropTable(
-                name: "Publisher");
+                name: "Publishers");
 
             migrationBuilder.DropIndex(
                 name: "IX_Books_PublisherId",
